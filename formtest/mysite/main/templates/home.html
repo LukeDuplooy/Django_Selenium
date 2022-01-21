@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            input {max-width: 20em}
+        </style>
+  </head>
+  <body>
+        {% load crispy_forms_tags %}
+
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand mx-auto" href="">
+          Car Database
+        </a>
+      </nav>
+      <br><br>
+
+      <div class="container">
+      <form method="post">
+          {% block content %}
+            {% csrf_token %}
+            {{ form|crispy }}
+          {% endblock %}
+        <br>
+        <button class ="btn btn-primary" type="submit" id= "submit_button">Submit</button>
+      </form>
+      </div>
+        <br><br>
+      <div class="container">
+        {% for car in cars %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ car.name }}</h5>
+            <p class="card-text">{{ car.year }}</p>
+            <p class="card-text">{{ car.hp }}</p>
+            <p class="card-text">{{ car.top_speed_mph }}</p>
+              <p class="card-text">{{ car.weight_kg }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    <!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+  </body>
+</html>
